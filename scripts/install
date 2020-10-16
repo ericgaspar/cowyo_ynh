@@ -24,7 +24,7 @@ ynh_abort_if_errors
 #=================================================
 
 domain=$YNH_APP_ARG_DOMAIN
-path_url="/"
+path_url="$YNH_APP_ARG_PATH"
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
 app=$YNH_APP_INSTANCE_NAME
@@ -72,7 +72,7 @@ chmod +x "$final_path/cowyo"
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring nginx web server..." --weight=1
+ynh_script_progression --message="Configuring NGINX web server..." --weight=1
 
 # Create a dedicated nginx config
 ynh_add_nginx_config
@@ -91,7 +91,7 @@ ynh_system_user_create $app
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
 
 # Set the systemd service settings
-ynh_replace_string --match_string="__PORT__" --replace_string="$port" --target_file="../conf/systemd.service"
+ynh_replace_string --match_string="__PORT__" --replace_string="$port" --target_file=w"../conf/systemd.service"
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
